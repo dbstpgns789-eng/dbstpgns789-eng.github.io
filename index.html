@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>윤세훈 · Sehun Yoon</title>
+<meta name="description" content="한양대학교 ERICA 인공지능학과. LLM 서비스와 평가·검증에 관심이 있습니다. 논문 카드뉴스 생성기, 학습용 AI 에이전트, 전세대출 추천 에이전트를 만들었습니다.">
+<meta property="og:title" content="윤세훈 · Sehun Yoon">
+<meta property="og:description" content="한양대학교 ERICA 인공지능학과. LLM 서비스와 평가·검증에 관심이 있습니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dbstpgns789-eng.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b4530a'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23f8f7f4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root {
+  --bg: #f8f7f4;
+  --ink: #1c1b19;
+  --muted: #6f6c66;
+  --line: #e2dfd8;
+  --accent: #b4530a;
+  --accent-soft: #f6e9dc;
+  --sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141311;
+    --ink: #ebe8e1;
+    --muted: #9a958c;
+    --line: #2b2925;
+    --accent: #f0a05a;
+    --accent-soft: #2e2118;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.75;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--accent); }
+p { margin: 0 0 1em; }
+ul { margin: 0; padding-left: 1.1em; }
+li { margin: 0.25em 0; }
+li::marker { color: var(--muted); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+/* nav */
+.nav {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 52px; }
+.nav .brand { font-family: var(--mono); font-size: 13px; }
+.nav .brand b { font-weight: 600; }
+.nav ul { list-style: none; display: flex; gap: 18px; padding: 0; margin: 0; }
+.nav li { margin: 0; }
+.nav a { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.nav a:hover, .nav a.active { color: var(--accent); }
+@media (max-width: 560px) { .nav ul { gap: 12px; } .nav a { font-size: 12px; } .nav .brand span { display: none; } }
+
+/* hero */
+.hero { padding: 88px 0 64px; }
+.hero .status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 12.5px; color: var(--muted);
+  margin-bottom: 26px;
+}
+.hero .status::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.hero h1 { font-size: 40px; line-height: 1.15; margin: 0 0 4px; letter-spacing: -0.02em; font-weight: 700; }
+.hero .en { font-family: var(--mono); font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+.hero .aff { font-size: 15.5px; color: var(--muted); margin-bottom: 26px; }
+.hero .lede { font-size: 19px; line-height: 1.65; max-width: 620px; margin-bottom: 30px; }
+.hero .lede em { font-style: normal; color: var(--accent); }
+.links { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.links a { font-family: var(--mono); font-size: 13.5px; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.links a:hover { border-color: var(--accent); }
+@media (max-width: 560px) { .hero { padding: 60px 0 48px; } .hero h1 { font-size: 34px; } .hero .lede { font-size: 17.5px; } }
+
+/* sections */
+section { padding: 56px 0; border-top: 1px solid var(--line); }
+.sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 26px; }
+.sec-head .idx { font-family: var(--mono); font-size: 12.5px; color: var(--accent); }
+.sec-head h2 { font-size: 22px; margin: 0; letter-spacing: -0.01em; font-weight: 700; }
+
+/* log entries */
+.entry {
+  display: grid; grid-template-columns: 116px 1fr; gap: 6px 26px;
+  padding: 26px 0; border-top: 1px solid var(--line);
+}
+.entry:first-of-type { border-top: 0; padding-top: 0; }
+.entry .when { font-family: var(--mono); font-size: 13px; color: var(--muted); padding-top: 5px; white-space: nowrap; }
+.entry .body h3 { font-size: 18px; margin: 0 0 4px; font-weight: 650; letter-spacing: -0.01em; }
+.entry .body h3 a { border-bottom: 1px solid transparent; }
+.entry .body h3 a:hover { border-color: var(--accent); }
+.entry .ctx { font-family: var(--mono); font-size: 12.5px; color: var(--muted); margin-bottom: 12px; }
+.entry .body p { margin-bottom: 0.7em; }
+.entry ul { margin: 0.4em 0 0.9em; }
+.entry .tags { font-family: var(--mono); font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+.entry .tags span + span::before { content: "·"; margin: 0 8px; opacity: .6; }
+.entry .out { display: flex; gap: 18px; margin-top: 10px; }
+.entry .out a { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+.entry .out a::after { content: " ↗"; opacity: .7; }
+@media (max-width: 600px) { .entry { grid-template-columns: 1fr; gap: 4px; padding: 22px 0; } .entry .when { padding-top: 0; } }
+
+/* compact rows */
+.row {
+  display: grid; grid-template-columns: 116px 1fr auto; gap: 6px 26px; align-items: baseline;
+  padding: 13px 0; border-top: 1px solid var(--line);
+}
+.row .when { font-family: var(--mono); font-size: 13px; color: var(--muted); white-space: nowrap; }
+.row .t { font-weight: 600; }
+.row .d { color: var(--muted); font-size: 15px; }
+.row .out a { font-family: var(--mono); font-size: 13px; color: var(--accent); white-space: nowrap; }
+.row .out a::after { content: " ↗"; opacity: .7; }
+@media (max-width: 600px) { .row { grid-template-columns: 1fr; gap: 2px; } .row .out { margin-top: 2px; } }
+.more { margin-top: 30px; }
+.more .label { font-family: var(--mono); font-size: 12.5px; color: var(--muted); margin-bottom: 4px; }
+
+/* skills */
+.skills { display: grid; grid-template-columns: 116px 1fr; gap: 12px 26px; margin: 0; }
+.skills dt { font-family: var(--mono); font-size: 13px; color: var(--muted); padding-top: 3px; }
+.skills dd { margin: 0; }
+@media (max-width: 600px) { .skills { grid-template-columns: 1fr; gap: 2px 0; } .skills dd { margin-bottom: 12px; } }
+
+/* contact */
+.contact p { max-width: 560px; }
+.contact .links { margin-top: 18px; }
+
+footer { padding: 40px 0 56px; border-top: 1px solid var(--line); }
+footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><b>yoon</b><span>.sehun</span></a>
+    <ul>
+      <li><a href="#about">about</a></li>
+      <li><a href="#education">edu</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#experience">exp</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="hero wrap">
+  <div class="status">현재 한국생산기술연구원 · papersweep 배포 준비 중</div>
+  <h1>윤세훈</h1>
+  <div class="en">Sehun Yoon</div>
+  <div class="aff">한양대학교 ERICA 인공지능학과 · 융합보안학과 다중전공 · 2028.02 졸업 예정</div>
+  <p class="lede">학교에서 딥러닝과 파운데이션 모델의 기반을 배우고, 프로젝트에서 활용을 키웁니다. 관심사는 <em>LLM 서비스의 신뢰성과 평가</em>입니다.</p>
+  <div class="links">
+    <a href="https://github.com/dbstpgns789-eng" target="_blank" rel="noopener">github</a>
+    <a href="https://www.linkedin.com/in/%EC%84%B8%ED%9B%88-%EC%9C%A4-525a843b7/" target="_blank" rel="noopener">linkedin</a>
+    <a href="#" id="mail-hero">email</a>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">01</span><h2>About</h2></div>
+    <p>논문 PDF를 카드뉴스로 바꾸는 서비스, 흩어진 학습 자료를 다시 찾는 시간을 줄이는 에이전트, 전세대출 약관을 대신 읽어 주는 추천 시스템. 지금까지 만든 것들의 공통점은 사람이 쓰는 시간을 줄이는 도구라는 점입니다.</p>
+    <p>LLM을 제품에 넣을 때 가장 어려운 부분은 모델을 고르는 일이 아니라 출력이 근거에 맞는지 확인하는 일이라고 생각합니다. 그래서 생성 결과를 원문과 대조해 검증하는 구조를 설계하는 데 시간을 많이 씁니다.</p>
+    <p>지금은 한국생산기술연구원에서 국가근로장학생으로 연구 과제를 수행하고 있습니다. 다음으로는 API 호출을 넘어 모델 학습과 파인튜닝을 직접 다루는 경험을 쌓으려 합니다.</p>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">02</span><h2>Education</h2></div>
+    <div class="entry">
+      <div class="when">2022.03 –</div>
+      <div class="body">
+        <h3>한양대학교 ERICA 인공지능학과</h3>
+        <div class="ctx">학사과정 · 2028.02 졸업 예정 · 2026.09부터 융합보안학과 다중전공</div>
+        <p>이수: 딥러닝 · 머신러닝 · 컴퓨터구조 · 확률론 · 데이터베이스 · 클라우드플랫폼개론 · 클라우드DB<br>
+        수강 중: 자연어처리 · 컴퓨터비전 · 캡스톤디자인</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when">2023.04 – 2024.10</div>
+      <div class="body">
+        <h3>군 복무</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">03</span><h2>Projects</h2></div>
+
+    <div class="entry">
+      <div class="when">2026 –</div>
+      <div class="body">
+        <h3><a href="https://github.com/dbstpgns789-eng/polyinsight" target="_blank" rel="noopener">papersweep</a></h3>
+        <div class="ctx">구 polyinsight · 한국생산기술연구원 연구 과제 · 국가근로장학생</div>
+        <p>논문 PDF를 넣으면 원문과 대조해 검증된 카드뉴스를 만들어 주는 AI 서비스입니다. 논문은 읽는 데 오래 걸리고, 읽어도 남에게 전하기 어렵다는 문제에서 출발했습니다.</p>
+        <ul>
+          <li>생성된 문장이 원문 근거를 벗어나지 않도록 검증 단계를 파이프라인에 포함</li>
+          <li>Azure에 배포해 테스트 사용자 피드백을 받으며 기능 보완 중</li>
+          <li>논문 1편당 LLM 호출 비용이 서비스 단가를 결정하는 구조라, 호출 단위를 줄이는 재설계 진행 중</li>
+          <li>파생물로 AI 논문을 쉽게 풀어 주는 인스타그램 계정 took_ai 운영</li>
+        </ul>
+        <div class="tags"><span>Python</span><span>LLM API</span><span>PDF 파싱</span><span>Azure</span></div>
+        <div class="out">
+          <a href="https://github.com/dbstpgns789-eng/polyinsight" target="_blank" rel="noopener">repo</a>
+          <a href="https://polyinsight.japaneast.cloudapp.azure.com" target="_blank" rel="noopener">live</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="when">2026</div>
+      <div class="body">
+        <h3><a href="https://github.com/dbstpgns789-eng/piecepool2" target="_blank" rel="noopener">piecepool</a></h3>
+        <div class="ctx">팀 프로젝트 6인 · 캡스톤 · 창업동아리 Advanced 승급 아이템</div>
+        <p>세컨드 브레인을 지향하는 학습용 AI 에이전트입니다. 학습 자료가 흩어져 있어 다시 찾고 다시 이해하는 데 드는 시간을 줄이는 것이 목표이고, 로컬에서 동작하는 지식 워크스페이스로 만들었습니다.</p>
+        <ul>
+          <li>2026 AI·SW 중심대학 디지털 경진대회 우수상 (AI·SW중심대학협의회장상, 2026.08)</li>
+          <li>2학기 창업동아리 Advanced 승급 심사 아이템으로 기업 캡스톤과 연계 추진 중</li>
+        </ul>
+        <div class="tags"><span>Tauri</span><span>Rust</span><span>TypeScript</span><span>로컬 LLM</span></div>
+        <div class="out">
+          <a href="https://github.com/dbstpgns789-eng/piecepool2" target="_blank" rel="noopener">repo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="when">2026</div>
+      <div class="body">
+        <h3><a href="https://github.com/dbstpgns789-eng/youth-jeonse-fit" target="_blank" rel="noopener">youth-jeonse-fit</a></h3>
+        <div class="ctx">WE-Meet 기업 연계 프로젝트 · 파이프라인 전체 설계 담당</div>
+        <p>사회초년생이 전세대출 약관을 읽고 자기에게 맞는 상품을 고르기 어렵다는 문제에서 출발한 추천 에이전트입니다. 금융 상품 문서를 근거로 적합성을 판단하고, 상품을 추천하고, 필요한 서류까지 안내합니다.</p>
+        <ul>
+          <li>PDF 파싱 → 사용자 맞춤 추천 → 추천 상품 맥락 기반 후속 질문 응답, 3단계 파이프라인 설계</li>
+          <li>도메인을 구매해 클라우드 서버에 6개월간 상시 배포·운영</li>
+          <li>사업단 우수팀 선정, 2026 SDU COSS 지·산·학 매칭데이 참가 (2026.10)</li>
+        </ul>
+        <div class="tags"><span>Python</span><span>FastAPI</span><span>LLM</span><span>PDF 파싱</span><span>클라우드 배포</span></div>
+        <div class="out">
+          <a href="https://github.com/dbstpgns789-eng/youth-jeonse-fit" target="_blank" rel="noopener">repo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="more">
+      <div class="label">// more</div>
+      <div class="row">
+        <div class="when">2026.06</div>
+        <div><span class="t">gpt2-small-matmul</span> <span class="d">· GPT-2 small 행렬곱 CUDA 최적화, 컴퓨터구조 팀 프로젝트</span></div>
+        <div class="out"><a href="https://github.com/dbstpgns789-eng/gpt2-small-matmul" target="_blank" rel="noopener">repo</a></div>
+      </div>
+      <div class="row">
+        <div class="when">2026.06</div>
+        <div><span class="t">credit-segmentation</span> <span class="d">· 1:1700 불균형 신용카드 고객 세분화, 계층적 분류로 Macro F1 0.688 (+53%)</span></div>
+        <div class="out"><a href="https://github.com/dbstpgns789-eng/credit-segmentation-v4" target="_blank" rel="noopener">repo</a></div>
+      </div>
+      <div class="row">
+        <div class="when">2026.06</div>
+        <div><span class="t">DORO-LMS</span> <span class="d">· 기업 연계 LMS, 역할별 권한과 백엔드 API를 연동한 프론트엔드</span></div>
+        <div class="out"><a href="https://github.com/dbstpgns789-eng/DORO-LMS" target="_blank" rel="noopener">repo</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">04</span><h2>Experience</h2></div>
+    <div class="entry">
+      <div class="when">2026 – 2027.02</div>
+      <div class="body">
+        <h3>한국생산기술연구원 (KITECH)</h3>
+        <div class="ctx">국가근로장학생</div>
+        <p>논문 기반 콘텐츠 생성 AI 연구 과제(papersweep)를 수행합니다. 테스트 사용자 피드백을 반영하고 상용 배포를 준비하고 있습니다.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when">2026.07</div>
+      <div class="body">
+        <h3>고등학생 AI 해커톤 멘토</h3>
+        <div class="ctx">경기도경제과학진흥원 · 2일</div>
+        <p>서비스톤과 구현톤 두 부문에서 고등학생 참가자의 기획과 구현을 도왔습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">05</span><h2>Skills &amp; Credentials</h2></div>
+    <dl class="skills">
+      <dt>languages</dt><dd>Python · TypeScript · Rust · SQL · CUDA</dd>
+      <dt>ai / ml</dt><dd>PyTorch · LLM API · RAG · Agent 파이프라인 · 생성 결과 검증·평가</dd>
+      <dt>backend / infra</dt><dd>FastAPI · Django · Tauri · Azure · 클라우드 배포·운영 · Git</dd>
+      <dt>awards</dt><dd>2026 AI·SW 중심대학 디지털 경진대회 우수상 (AI·SW중심대학협의회장상, 2026.08)</dd>
+      <dt>credentials</dt><dd>클라우드서비스 마이크로전공 이수 (데이터보안·활용 융합 COSS 사업단, 2026.08)<br>미래설계 SDP 장학생 (2026)</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">06</span><h2>Contact</h2></div>
+    <p>프로젝트, 연구실, 협업 관련 연락은 이메일로 주시면 됩니다.</p>
+    <div class="links">
+      <a href="#" id="mail-contact">dbstpgns789 [at] hanyang.ac.kr</a>
+      <a href="https://github.com/dbstpgns789-eng" target="_blank" rel="noopener">github.com/dbstpgns789-eng</a>
+      <a href="https://www.linkedin.com/in/%EC%84%B8%ED%9B%88-%EC%9C%A4-525a843b7/" target="_blank" rel="noopener">linkedin</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 윤세훈</span>
+    <span>last updated 2026.09.16 · plain html, no framework</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var u = "dbstpgns789", d = "hanyang.ac.kr", addr = u + "@" + d;
+  ["mail-hero", "mail-contact"].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.href = "mailto:" + addr;
+    if (id === "mail-contact") el.textContent = addr;
+  });
+
+  var links = document.querySelectorAll(".nav a[href^='#']");
+  var secs = [];
+  links.forEach(function (a) {
+    var s = document.querySelector(a.getAttribute("href"));
+    if (s) secs.push({ a: a, s: s });
+  });
+  if ("IntersectionObserver" in window && secs.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        secs.forEach(function (x) { x.a.classList.toggle("active", x.s === e.target); });
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    secs.forEach(function (x) { io.observe(x.s); });
+  }
+})();
+</script>
+</body>
+</html>
