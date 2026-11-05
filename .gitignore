@@ -1,0 +1,5 @@
+.impeccable/
+__pycache__/
+*.log
+PRODUCT.md
+docs/

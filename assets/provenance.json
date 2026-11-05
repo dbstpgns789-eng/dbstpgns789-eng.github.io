@@ -1,0 +1,18 @@
+{
+  "assets/plates/maldong-image.png": {
+    "sha256": "cc89f5c65a2c36b65936032bde38659cbe973dba3cffd3bc647c47b6f6b50cf7",
+    "origin": "See assets/README.md"
+  },
+  "assets/plates/piecepool-image.png": {
+    "sha256": "2780606d120b38a00506f19cea0deca39166efcd8d3f8ac86d4afadc85cc4a1e",
+    "origin": "See assets/README.md"
+  },
+  "assets/plates/omniguard-image.png": {
+    "sha256": "0423903c1d3bde05789e867113bff688f7a556b6fb2cf3cb321b1343cdd7340b",
+    "origin": "See assets/README.md"
+  },
+  "assets/piecepool-app.png": {
+    "sha256": "412fa49e76002140336d4b34bb9f0153348b6e931e275008371fc72ecf44763a",
+    "origin": "See assets/README.md"
+  }
+}
